@@ -1,0 +1,18 @@
+#sidebar {
+    
+    width: 100%;
+    background-color: red;
+}
+
+#forecast {
+    background-color: blue;
+    
+}
+
+#cityInfo {
+    background-color: yellow;
+}
+
+#forecast-cards {
+    background-color: green;
+}
