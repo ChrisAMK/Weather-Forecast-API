@@ -1,11 +1,10 @@
 #sidebar {
-    
-    width: 100%;
     background-color: red;
 }
 
 #forecast {
     background-color: blue;
+    
     
 }
 
@@ -15,4 +14,16 @@
 
 #forecast-cards {
     background-color: green;
+}
+
+#cityContainer{
+    background-color: purple;
+}
+
+#test {
+    background-color: orange;
+}
+
+.heading {
+    text-align: center;
 }
