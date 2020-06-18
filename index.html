@@ -17,76 +17,81 @@
         <h1 class="heading">Weather Around the World</h1>
     </header>
 
-    <aside id="sidebar" class="container">
+    <div id="sidebar" class="full-container">
         <div class="row">
-            <div class="col-3">
-                <h3>Search for a City</h3>
+            <div class="col-2">
+                <h5>Search for a City</h5>
                 <div>
                     <input type="text" id="userInput">
                     <button id="searchBtn">Search</button>
                 </div>
                 <br>
+                <div>
+                    <ul>
+                        <li>
+                            <p>Perth</p>
+                        </li>
+                    </ul>
+
+                </div>
                 <h3>Perth</h3>
-                <h3>Melbourne</h3>
-                <h3>Darwin</h3>
-                <h3>Alice Springs</h3>
-                <h3>Sydney</h3>
-                <h3>Adelaide</h3>
-                <h3>Canberra</h3>
-                <h3>Hobart</h3>
-                <h3>Brisbane</h3>
+                
             </div>
 
 
-            <div id="cityContainer" class="col-9">
+            <div id="cityContainer" class="col-10">
                 <div id="cityInfo">
-                    <h3 id="cityName">Perth</h3>
-                    <h6 id="cityTemp">40oc</h6>
-                    <h6 id="cityWind">25km/h</h6>
-                    <h6 id="cityUV">9.6</h6>
-                    <h6 id="cityLon"></h6>
-                    <h6 id="cityLat"></h6>
+                    <h3 id="cityName">Search a City to Begin!</h3>
+                    <h6 id="cityTemp"></h6>
+                    <h6 id="cityHumidity"></h6>
+                    <h6 id="cityWind"></h6>
+                    <div id="cityUvDiv" class="hide">
+                        <p>UV index: <span id="cityUV"></span></p>
+                    </div>
+                    
                 </div>
 
 
                 <div id="forecast">
+                    <br>
                     <h3>5 Day Forecast</h3>
+                    <hr>
                     <div id="forecast-cards" class="row">
-                        <div class="col-2">
-                            <h4 id="forecastDate1">6/12/12</h4>
-                            <img alt="Icon" id="forecastPic1">
-                            <p id="forecastTemp1">Temperature</p>
-                            <p id="forecastHumidity1">Humidity</p>
+                        <div class="col-2dot4 forecast-card">
+                            <h4 id="forecastDate1"></h4>
+                            <img src="" id="forecastPic1">
+                            <p id="forecastTemp1"></p>
+                            <p id="forecastHumidity1"></p>
                         </div>
-                        <div class="col-2">
-                            <h4 id="forecastDate2">6/12/12</h4>
-                            <img alt="Icon" id="forecastPic2">
-                            <p id="forecastTemp2">Temperature</p>
-                            <p id="forecastHumidity2">Humidity</p>
+                        <div class="col-2dot4 forecast-card">
+                            <h4 id="forecastDate2"></h4>
+                            <img src="" id="forecastPic2">
+                            <p id="forecastTemp2"></p>
+                            <p id="forecastHumidity2"></p>
                         </div>
-                        <div class="col-2">
-                            <h4 id="forecastDate3">6/12/12</h4>
-                            <img alt="Icon" id="forecastPic3">
-                            <p id="forecastTemp3">Temperature</p>
-                            <p id="forecastHumidity3">Humidity</p>
+                        <div class="col-2dot4 forecast-card">
+                            <h4 id="forecastDate3"></h4>
+                            <img src="" id="forecastPic3">
+                            <p id="forecastTemp3"></p>
+                            <p id="forecastHumidity3"></p>
                         </div>
-                        <div class="col-2">
-                            <h4 id="forecastDate4">6/12/12</h4>
-                            <img alt="Icon" id="forecastPic4">
-                            <p id="forecastTemp4">Temperature</p>
-                            <p id="forecastHumidity4">Humidity</p>
+                        <div class="col-2dot4 forecast-card">
+                            <h4 id="forecastDate4"></h4>
+                            <img src="" id="forecastPic4">
+                            <p id="forecastTemp4"></p>
+                            <p id="forecastHumidity4"></p>
                         </div>
-                        <div class="col-2">
-                            <h4 id="forecastDate5">6/12/12</h4>
-                            <img alt="Icon" id="forecastPic5">
-                            <p id="forecastTemp5">Temperature</p>
-                            <p id="forecastHumidity5">Humidity</p>
+                        <div class="col-2dot4 forecast-card">
+                            <h4 id="forecastDate5"></h4>
+                            <img src="" id="forecastPic5">
+                            <p id="forecastTemp5"></p>
+                            <p id="forecastHumidity5"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </aside>
+    </div>
 
   
     </main>

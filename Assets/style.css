@@ -1,23 +1,58 @@
+
+* body{
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+}
+
 #sidebar {
-    background-color: red;
+    background-color: rgb(243, 243, 243);
+    padding: 20px;
+    border-radius: 20px;
+    border-style: 10px;
+}
+.full-container {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.hide {
+    display: none;
+}
+
+#searchBtn {
+    width: 100%;
+}
+
+#userInput {
+    width: 100%;
 }
 
 #forecast {
-    background-color: blue;
-    
-    
+    background-color: rgb(243, 243, 243);
 }
 
 #cityInfo {
-    background-color: yellow;
+    background-color: rgb(201, 201, 201);
+    padding: 10px;
+    border-radius: 20px;
+    border-style: solid;
 }
 
 #forecast-cards {
-    background-color: green;
+    background-color: rgb(243, 243, 243);
+    
+}
+
+.forecast-card {
+    background-color: gold;
+    padding: 0px;
+    border-radius: 20px;
+    border-style: solid;
+    text-align: center;
 }
 
 #cityContainer{
-    background-color: purple;
+    background-color: rgb(243, 243, 243);
+    padding: -10px;
 }
 
 #test {
@@ -26,4 +61,72 @@
 
 .heading {
     text-align: center;
+}
+
+.UV-red {
+    background-color: rgb(255, 82, 82);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.UV-green {
+    background-color: rgb(0, 192, 0);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.UV-yellow {
+    background-color: rgb(255, 255, 86);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.col-2dot4,
+.col-sm-2dot4,
+.col-md-2dot4,
+.col-lg-2dot4,
+.col-xl-2dot4 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-2dot4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+@media (min-width: 540px) {
+    .col-sm-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+@media (min-width: 720px) {
+    .col-md-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+@media (min-width: 960px) {
+    .col-lg-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+@media (min-width: 1140px) {
+    .col-xl-2dot4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
 }
