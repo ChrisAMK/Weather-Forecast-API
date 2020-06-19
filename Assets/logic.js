@@ -128,7 +128,7 @@ function searchCity() {
             console.log(UVresponse)
             currentCityUV.html(UVresponse.value);
             currentCityUVDiv.removeClass( "hide" );
-
+                /// Sets the class for UV depending on Values
             if (UVresponse.value < 3.3) {
                 currentCityUV.attr("class", "UV-green")
                 console.log("green")
@@ -148,33 +148,33 @@ function searchCity() {
 function renderSearches() {
     // Clears the HTML
     searchHistory.empty();
-    
-
-    // Render a new li for each search
+    // Render a new button for each search
     for (var i = 0; i < pastSearches.length; i++) {
     var search = pastSearches[i];
-    
+    // Defining the New button to be prepended
     var btn = document.createElement("button");
     btn.textContent = search;
     btn.setAttribute("class", "col-11 historyBtn");
     btn.setAttribute("data-link", search)
-    ///btn.setAttribute("id", "firstSearch")
     searchHistory.prepend(btn);
   }
 }
-
+// This function grabs the Local Storage and puts in to a variable to be used
 function init() {
     var storedHistory = JSON.parse(localStorage.getItem("history"));
     if (storedHistory !== null) {
         pastSearches = storedHistory
     }
+    // Initial render updates the screen on load
     renderSearches()
 }
 
+// This function simpliy stores the whatever to Local Storage under the "history" Key
 function storeHistory() {
     localStorage.setItem("history", JSON.stringify(pastSearches));
 }
 
+// This Function Clears the History SideBar
 function clearLocalStorage() {
     localStorage.clear()
     pastSearches = [];
@@ -182,6 +182,8 @@ function clearLocalStorage() {
     searchHistory.empty()
 }
 
+/// This function for some reason needs to be made as a repeat of the one below
+/// To access $(this) i cant just call the same function above. for the future i'll refactor
 function startingHistory() {
     var pastUserSearch =  $("#searchHistory").find("button")
 
@@ -259,7 +261,7 @@ function startingHistory() {
                 console.log(UVresponse)
                 currentCityUV.html(UVresponse.value);
                 currentCityUVDiv.removeClass( "hide" );
-    
+                /// Sets the class for UV depending on Values
                 if (UVresponse.value < 3.3) {
                     currentCityUV.attr("class", "UV-green")
                     console.log("green")
@@ -274,10 +276,10 @@ function startingHistory() {
                 )
             }
         )
-    
     })
 }
-
+/// This function is the same as above but for some reason it can only be executed after a 
+/// search is completed, while the function above will only work while no search has been completed.
 function historySearch() {
     pastUserSearch =  $("#searchHistory").find("button")
 
@@ -320,7 +322,7 @@ function historySearch() {
                 forecastCards.removeClass("hide")
             }
         )
-        
+            /// Users the data-link Attribute as the search term in the API
         var searchTerm = $(this).attr("data-link")
         console.log(searchTerm)
         var key = "bda2f2ea374379c994c54cc335a5e52b";
@@ -354,7 +356,7 @@ function historySearch() {
                 console.log(UVresponse)
                 currentCityUV.html(UVresponse.value);
                 currentCityUVDiv.removeClass( "hide" );
-    
+                    /// Sets the class for UV depending on Values
                 if (UVresponse.value < 3.3) {
                     currentCityUV.attr("class", "UV-green")
                     console.log("green")
@@ -372,8 +374,8 @@ function historySearch() {
     })
 }
 
-clearBtn.on("click", clearLocalStorage)
 
+// This is the starting code that is executed upon Loading.
 init();
 startingHistory();
 
@@ -401,6 +403,9 @@ searchBtn.on("click", function(event) {
     renderSearches()
     historySearch()
 })
+
+/// This little code is the Event Listener for the clear Local Storage Function
+clearBtn.on("click", clearLocalStorage)
 
 
 
