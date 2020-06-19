@@ -3,7 +3,7 @@
     font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
 }
 
-#sidebar {
+#main-container {
     background-color: rgb(243, 243, 243);
     padding: 20px;
     border-radius: 20px;
@@ -14,12 +14,27 @@
     margin-right: 5%;
 }
 
+button {
+    border-radius: 5px;
+    
+}
+
 .hide {
     display: none;
 }
 
+.historyBtn {
+    background-color: rgb(227, 227, 255);
+}
+
 #searchBtn {
     width: 100%;
+    background-color: gold;
+}
+
+#clearBtn {
+    width: 100%;
+    background-color: rgb(255, 105, 105);
 }
 
 #userInput {
@@ -35,11 +50,15 @@
     padding: 10px;
     border-radius: 20px;
     border-style: solid;
+    margin-top: 20px;
 }
 
 #forecast-cards {
     background-color: rgb(243, 243, 243);
-    
+}
+
+header {
+    background-color: gold;
 }
 
 .forecast-card {

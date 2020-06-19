@@ -42,11 +42,11 @@ var pastSearches = []
 
 var today = moment().format("MMM Do YYYY");
 
-var oneDays = moment().add(1, 'days').format("MMM Do");
-var twoDays = moment().add(2, 'days').format("MMM Do"); 
-var threeDays = moment().add(3, 'days').format("MMM Do");
-var fourDays = moment().add(4, 'days').format("MMM Do");
-var fiveDays = moment().add(5, 'days').format("MMM Do");
+var oneDays = moment().add(1, 'days').format("MMM Do dddd");
+var twoDays = moment().add(2, 'days').format("MMM Do dddd"); 
+var threeDays = moment().add(3, 'days').format("MMM Do dddd");
+var fourDays = moment().add(4, 'days').format("MMM Do dddd");
+var fiveDays = moment().add(5, 'days').format("MMM Do dddd");
 
 // This function is triggered when the Search Button is pressed.
 function searchCityForecast() {
@@ -154,7 +154,7 @@ function renderSearches() {
     // Defining the New button to be prepended
     var btn = document.createElement("button");
     btn.textContent = search;
-    btn.setAttribute("class", "col-11 historyBtn");
+    btn.setAttribute("class", "col-12 col-sm-12 col-md-12 col-lg-11 historyBtn");
     btn.setAttribute("data-link", search)
     searchHistory.prepend(btn);
   }

@@ -14,12 +14,12 @@
 
 <body>
     <header>
-        <h1 class="heading">Weather Around the World</h1>
+        <h1 class="heading">ChedWeather</h1>
     </header>
 
-    <div id="sidebar" class="full-container">
+    <main id="main-container" class="full-container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <h5>Search for a City</h5>
                 <div>
                     <input type="text" id="userInput" placeholder="Enter a City">
@@ -28,16 +28,15 @@
                 <br>
                 <h4>Search History</h4>
                 <hr>
-                <button id="clearBtn" class="col-11">Click to Clear</button>
+                <button id="clearBtn" class="col-12">Click to Clear</button>
                 <hr>
                 <br>
                 <div class="row" id="searchHistory">
-                    
                 </div>
             </div>
 
 
-            <div id="cityContainer" class="col-10">
+            <div id="cityContainer" class="col-12 col-sm-12 col-md-9 col-lg-10">
                 <div id="cityInfo">
                     <h3 id="cityName">Search a City to Begin!</h3>
                     <h6 id="cityTemp"></h6>
@@ -55,31 +54,31 @@
                     <h3>5 Day Forecast</h3>
                     <hr>
                     <div id="forecast-cards" class="row hide">
-                        <div class="col-2dot4 forecast-card">
+                        <div class="col-sm-4 forecast-card">
                             <h4 id="forecastDate1"></h4>
                             <img src="" id="forecastPic1">
                             <p id="forecastTemp1"></p>
                             <p id="forecastHumidity1"></p>
                         </div>
-                        <div class="col-2dot4 forecast-card">
+                        <div class="col-sm-4 forecast-card">
                             <h4 id="forecastDate2"></h4>
                             <img src="" id="forecastPic2">
                             <p id="forecastTemp2"></p>
                             <p id="forecastHumidity2"></p>
                         </div>
-                        <div class="col-2dot4 forecast-card">
+                        <div class="col-sm-4 forecast-card">
                             <h4 id="forecastDate3"></h4>
                             <img src="" id="forecastPic3">
                             <p id="forecastTemp3"></p>
                             <p id="forecastHumidity3"></p>
                         </div>
-                        <div class="col-2dot4 forecast-card">
+                        <div class="col-sm-6 forecast-card">
                             <h4 id="forecastDate4"></h4>
                             <img src="" id="forecastPic4">
                             <p id="forecastTemp4"></p>
                             <p id="forecastHumidity4"></p>
                         </div>
-                        <div class="col-2dot4 forecast-card">
+                        <div class="col-sm-6 forecast-card">
                             <h4 id="forecastDate5"></h4>
                             <img src="" id="forecastPic5">
                             <p id="forecastTemp5"></p>
@@ -89,13 +88,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-  
     </main>
-    
-        
-
     <script src="Assets/logic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </body>
