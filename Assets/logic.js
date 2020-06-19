@@ -1,3 +1,5 @@
+// Declaring all my Variables to Simpilify Code
+
 var cityInfo = $("#cityInfo")
 var currentCityName = $("#cityName");
 var currentCityTemp = $("#cityTemp");
@@ -5,6 +7,10 @@ var currentCityWind = $("#cityWind");
 var currentCityUV = $("#cityUV");
 var currentCityHumidity = $("#cityHumidity");
 var currentCityUVDiv = $("#cityUvDiv");
+var searchHistory = $("#searchHistory");
+var clearBtn = $("#clearBtn");
+var historyBtn = $(".col-11.historyBtn");
+var forecastCards = $("#forecast-cards");
 
 var forecastDate1 = $("#forecastDate1");
 var forecastDate2 = $("#forecastDate2");
@@ -32,6 +38,7 @@ var forecastPic5 = $("#forecastPic5");
 
 var searchBtn = $("#searchBtn");
 var userInput = $("#userInput");
+var pastSearches = []
 
 var today = moment().format("MMM Do YYYY");
 
@@ -41,22 +48,20 @@ var threeDays = moment().add(3, 'days').format("MMM Do");
 var fourDays = moment().add(4, 'days').format("MMM Do");
 var fiveDays = moment().add(5, 'days').format("MMM Do");
 
-searchBtn.on("click", function() {
-    searchCity()
-    searchCityForecast()
-})
-
+// This function is triggered when the Search Button is pressed.
 function searchCityForecast() {
-    
+    // This grabs the Users input for which city they want to search.
     var searchTerm = userInput.val()
     var key = "bda2f2ea374379c994c54cc335a5e52b";
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
-
+    // Ajax Call grabs the information from the API and presents the data in an object
     $.ajax({
         url: queryURL,
         method: "GET"
+        // Once the request is completed, the Then Function is triggered and the code below can execute with the required information
     }).then(function(response) {
-            console.log(response)
+            // I am setting all the 5 day forecast card information here. I need date (moment.js), Temp, Humidity, and the Icon to represent the temperature.
+            // This request is a different API, it is the OpenweatherMaps Forecast API. slightly different to the weather and UV.
             forecastDate1.html(oneDays)
             forecastTemp1.html("Temp: " + response.list[7].main.temp + " °C")
             forecastHumidity1.html("Humidity: " + response.list[7].main.humidity + " %")
@@ -81,10 +86,13 @@ function searchCityForecast() {
             forecastTemp5.html("Temp: " + response.list[35].main.temp + " °C")
             forecastHumidity5.html("Humidity: " + response.list[35].main.humidity + " %")
             forecastPic5.attr ("src", "Assets/" + response.list[35].weather[0].icon + "@2x.png")
+            forecastCards.removeClass("hide")
         }
     )
 }
 
+// This function requests information on a city and is all current Values. i had to chain the UV request inside this request because the UV request needs
+// Latitude and Longitude as a perimiter that is returned in the First API request.
 function searchCity() {
     
     var searchTerm = userInput.val()
@@ -98,27 +106,26 @@ function searchCity() {
     }).then(function(response) {
             console.log(response)
     
+            // This is capturing the Longitude and Latitude of the cities so i can use it for the second Request.
             userLat = response.coord.lat
             userLon = response.coord.lon
 
+            // This code sets all the target cities information in the Big section.
             currentCityName.html(response.name + " (" + today + ") " + '<img src="Assets/' + response.weather[0].icon + '@2x.png"></img>')
             currentCityTemp.html("Temperature: " + response.main.temp + " °C")
             currentCityHumidity.html("Humidity: " + response.main.humidity + " % ")
             currentCityWind.html("Wind Speed: " + response.wind.speed + " MPH")
 
-            console.log(response.weather[0].icon)
-
-            Celcius = (response.main.temp - 273.15) * 1.80 + 32
-            
+            // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
             var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
             var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
 
+            // This Request is for the UV Index, as it is a seperate API
             $.ajax({
                 url: UVqueryURL,
                 method: "GET"
             }).then(function(UVresponse) {
             console.log(UVresponse)
-            //currentCityUVDiv.html("<p>UV index: <span id='cityUV'>" + UVresponse.value + "</span></p>")
             currentCityUV.html(UVresponse.value);
             currentCityUVDiv.removeClass( "hide" );
 
@@ -132,34 +139,138 @@ function searchCity() {
                 currentCityUV.attr("class", "UV-yellow")
                 console.log("yellow")
             }
-
                 }
             )
         }
     )
 }
 
-function searchCityUV() {
+function renderSearches() {
+    // Clears the HTML
+    searchHistory.empty();
     
-    var userLat = CityLat.val()
-    var userLon = CityLon.val()
-    console.log(userLat)
-    console.log(userLon)
 
-    var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
-    console.log(userLat)
-    console.log(userLon)
-    var queryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
-    //var queryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + key + "&lat=-31.93&lon=115.83";
-    console.log(UVqueryURL)
-
-
-    $.ajax({
-        url: UVqueryURL,
-        method: "GET"
-    }).then(function(UVresponse) {
-            console.log(UVresponse)
-            
-        }
-    )
+    // Render a new li for each search
+    for (var i = 0; i < pastSearches.length; i++) {
+    var search = pastSearches[i];
+    
+    var btn = document.createElement("button");
+    btn.textContent = search;
+    btn.setAttribute("class", "col-11 historyBtn");
+    btn.setAttribute("data-link", search)
+    ///btn.setAttribute("id", "firstSearch")
+    searchHistory.append(btn);
+  }
 }
+
+function init() {
+    var storedHistory = JSON.parse(localStorage.getItem("history"));
+    if (storedHistory !== null) {
+        pastSearches = storedHistory
+    }
+    renderSearches()
+}
+
+function storeHistory() {
+    localStorage.setItem("history", JSON.stringify(pastSearches));
+}
+
+function clearLocalStorage() {
+    localStorage.clear()
+
+    alert("hey")
+    renderSearches()
+    searchHistory.empty()
+}
+
+function startingHistory() {
+    var pastUserSearch =  $("#searchHistory").find("button")
+
+    pastUserSearch.on("click", function() {
+    var tester = $(this).attr("data-link")
+    console.log(tester)
+    })
+}
+
+function historySearch() {
+    pastUserSearch =  $("#searchHistory").find("button")
+    console.log(pastUserSearch)
+
+    pastUserSearch.on("click", function() {
+        var tester = $(this).attr("data-link")
+        console.log(tester)
+    })
+}
+
+clearBtn.on("click", clearLocalStorage)
+
+init();
+startingHistory();
+
+// This is the Event Listener For the Search Button. When Clicked, the function is be executed.
+searchBtn.on("click", function(event) {
+    
+    event.preventDefault()
+
+    if (userInput.val() === "") {
+        return;
+    }
+
+    searchCity()
+    searchCityForecast()
+
+    if (pastSearches.includes(userInput.val())) {
+        return;
+    }
+
+    var pastSearch = userInput.val().trim()
+    pastSearches.push(pastSearch)
+    userInput.val("");
+
+    storeHistory()
+    renderSearches()
+    historySearch()
+
+    // pastUserSearch =  $("#searchHistory").find("button")
+    // console.log(pastUserSearch)
+
+    // pastUserSearch.on("click", function() {
+    //     var tester = $(this).attr("data-link")
+    //     console.log(tester)
+    // })
+})
+
+
+
+
+
+
+
+
+
+
+
+// console.log(pastUserSearch)
+
+// historyBtn.on("click", function() {
+//     var tester = $(this).attr("data-link")
+//     console.log(tester)
+// })
+
+//historyBtn.on("click", function() {
+//    alert("hey")
+//    console.log("hey")
+//})
+
+//$("#firstSearch").on("click", function() {
+//    alert("hey")
+//})
+
+// $(".col-11.historyBtn").on("click", function() {
+//     var tester = $(this).attr("data-link")
+//     console.log(tester)
+// })
+
+
+
+
