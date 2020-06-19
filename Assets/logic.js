@@ -53,7 +53,7 @@ function searchCityForecast() {
     // This grabs the Users input for which city they want to search.
     var searchTerm = userInput.val()
     var key = "bda2f2ea374379c994c54cc335a5e52b";
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
     // Ajax Call grabs the information from the API and presents the data in an object
     $.ajax({
         url: queryURL,
@@ -98,7 +98,7 @@ function searchCity() {
     var searchTerm = userInput.val()
     console.log(searchTerm)
     var key = "bda2f2ea374379c994c54cc335a5e52b";
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
 
     $.ajax({
         url: queryURL,
@@ -118,7 +118,7 @@ function searchCity() {
 
             // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
             var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
-            var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
+            var UVqueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
 
             // This Request is for the UV Index, as it is a seperate API
             $.ajax({
@@ -191,7 +191,7 @@ function startingHistory() {
         
         var searchTerm = $(this).attr("data-link")
         var key = "bda2f2ea374379c994c54cc335a5e52b";
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
         // Ajax Call grabs the information from the API and presents the data in an object
         $.ajax({
             url: queryURL,
@@ -231,7 +231,7 @@ function startingHistory() {
         var searchTerm = $(this).attr("data-link")
         console.log(searchTerm)
         var key = "bda2f2ea374379c994c54cc335a5e52b";
-        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
     
         $.ajax({
             url: queryURL,
@@ -251,7 +251,7 @@ function startingHistory() {
     
                 // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
                 var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
-                var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
+                var UVqueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
     
                 // This Request is for the UV Index, as it is a seperate API
                 $.ajax({
@@ -286,7 +286,7 @@ function historySearch() {
     pastUserSearch.on("click", function() {
         var searchTerm = $(this).attr("data-link")
         var key = "bda2f2ea374379c994c54cc335a5e52b";
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
         // Ajax Call grabs the information from the API and presents the data in an object
         $.ajax({
             url: queryURL,
@@ -326,7 +326,7 @@ function historySearch() {
         var searchTerm = $(this).attr("data-link")
         console.log(searchTerm)
         var key = "bda2f2ea374379c994c54cc335a5e52b";
-        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
     
         $.ajax({
             url: queryURL,
