@@ -159,7 +159,7 @@ function renderSearches() {
     btn.setAttribute("class", "col-11 historyBtn");
     btn.setAttribute("data-link", search)
     ///btn.setAttribute("id", "firstSearch")
-    searchHistory.append(btn);
+    searchHistory.prepend(btn);
   }
 }
 
@@ -177,8 +177,7 @@ function storeHistory() {
 
 function clearLocalStorage() {
     localStorage.clear()
-
-    alert("hey")
+    pastSearches = [];
     renderSearches()
     searchHistory.empty()
 }
@@ -187,18 +186,189 @@ function startingHistory() {
     var pastUserSearch =  $("#searchHistory").find("button")
 
     pastUserSearch.on("click", function() {
-    var tester = $(this).attr("data-link")
-    console.log(tester)
+        
+        var searchTerm = $(this).attr("data-link")
+        var key = "bda2f2ea374379c994c54cc335a5e52b";
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
+        // Ajax Call grabs the information from the API and presents the data in an object
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+            // Once the request is completed, the Then Function is triggered and the code below can execute with the required information
+        }).then(function(response) {
+                // I am setting all the 5 day forecast card information here. I need date (moment.js), Temp, Humidity, and the Icon to represent the temperature.
+                // This request is a different API, it is the OpenweatherMaps Forecast API. slightly different to the weather and UV.
+                forecastDate1.html(oneDays)
+                forecastTemp1.html("Temp: " + response.list[7].main.temp + " °C")
+                forecastHumidity1.html("Humidity: " + response.list[7].main.humidity + " %")
+                forecastPic1.attr ("src", "Assets/" + response.list[7].weather[0].icon + "@2x.png")
+
+                forecastDate2.html(twoDays)
+                forecastTemp2.html("Temp: " + response.list[14].main.temp + " °C")
+                forecastHumidity2.html("Humidity: " + response.list[14].main.humidity + " %")
+                forecastPic2.attr ("src", "Assets/" + response.list[14].weather[0].icon + "@2x.png")
+
+                forecastDate3.html(threeDays)
+                forecastTemp3.html("Temp: " + response.list[21].main.temp + " °C")
+                forecastHumidity3.html("Humidity: " + response.list[21].main.humidity + " %")
+                forecastPic3.attr ("src", "Assets/" + response.list[21].weather[0].icon + "@2x.png")
+
+                forecastDate4.html(fourDays)
+                forecastTemp4.html("Temp: " + response.list[28].main.temp + " °C")
+                forecastHumidity4.html("Humidity: " + response.list[28].main.humidity + " %")
+                forecastPic4.attr ("src", "Assets/" + response.list[28].weather[0].icon + "@2x.png")
+
+                forecastDate5.html(fiveDays)
+                forecastTemp5.html("Temp: " + response.list[35].main.temp + " °C")
+                forecastHumidity5.html("Humidity: " + response.list[35].main.humidity + " %")
+                forecastPic5.attr ("src", "Assets/" + response.list[35].weather[0].icon + "@2x.png")
+                forecastCards.removeClass("hide")
+            }
+        )
+    
+        var searchTerm = $(this).attr("data-link")
+        console.log(searchTerm)
+        var key = "bda2f2ea374379c994c54cc335a5e52b";
+        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
+    
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+                console.log(response)
+        
+                // This is capturing the Longitude and Latitude of the cities so i can use it for the second Request.
+                userLat = response.coord.lat
+                userLon = response.coord.lon
+    
+                // This code sets all the target cities information in the Big section.
+                currentCityName.html(response.name + " (" + today + ") " + '<img src="Assets/' + response.weather[0].icon + '@2x.png"></img>')
+                currentCityTemp.html("Temperature: " + response.main.temp + " °C")
+                currentCityHumidity.html("Humidity: " + response.main.humidity + " % ")
+                currentCityWind.html("Wind Speed: " + response.wind.speed + " MPH")
+    
+                // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
+                var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
+                var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
+    
+                // This Request is for the UV Index, as it is a seperate API
+                $.ajax({
+                    url: UVqueryURL,
+                    method: "GET"
+                }).then(function(UVresponse) {
+                console.log(UVresponse)
+                currentCityUV.html(UVresponse.value);
+                currentCityUVDiv.removeClass( "hide" );
+    
+                if (UVresponse.value < 3.3) {
+                    currentCityUV.attr("class", "UV-green")
+                    console.log("green")
+                } else if (UVresponse.value > 6.6) {
+                    currentCityUV.attr("class", "UV-red")
+                    console.log("red")
+                } else {
+                    currentCityUV.attr("class", "UV-yellow")
+                    console.log("yellow")
+                }
+                    }
+                )
+            }
+        )
+    
     })
 }
 
 function historySearch() {
     pastUserSearch =  $("#searchHistory").find("button")
-    console.log(pastUserSearch)
 
     pastUserSearch.on("click", function() {
-        var tester = $(this).attr("data-link")
-        console.log(tester)
+        var searchTerm = $(this).attr("data-link")
+        var key = "bda2f2ea374379c994c54cc335a5e52b";
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=metric&APPID=" + key;
+        // Ajax Call grabs the information from the API and presents the data in an object
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+            // Once the request is completed, the Then Function is triggered and the code below can execute with the required information
+        }).then(function(response) {
+                // I am setting all the 5 day forecast card information here. I need date (moment.js), Temp, Humidity, and the Icon to represent the temperature.
+                // This request is a different API, it is the OpenweatherMaps Forecast API. slightly different to the weather and UV.
+                forecastDate1.html(oneDays)
+                forecastTemp1.html("Temp: " + response.list[7].main.temp + " °C")
+                forecastHumidity1.html("Humidity: " + response.list[7].main.humidity + " %")
+                forecastPic1.attr ("src", "Assets/" + response.list[7].weather[0].icon + "@2x.png")
+
+                forecastDate2.html(twoDays)
+                forecastTemp2.html("Temp: " + response.list[14].main.temp + " °C")
+                forecastHumidity2.html("Humidity: " + response.list[14].main.humidity + " %")
+                forecastPic2.attr ("src", "Assets/" + response.list[14].weather[0].icon + "@2x.png")
+
+                forecastDate3.html(threeDays)
+                forecastTemp3.html("Temp: " + response.list[21].main.temp + " °C")
+                forecastHumidity3.html("Humidity: " + response.list[21].main.humidity + " %")
+                forecastPic3.attr ("src", "Assets/" + response.list[21].weather[0].icon + "@2x.png")
+
+                forecastDate4.html(fourDays)
+                forecastTemp4.html("Temp: " + response.list[28].main.temp + " °C")
+                forecastHumidity4.html("Humidity: " + response.list[28].main.humidity + " %")
+                forecastPic4.attr ("src", "Assets/" + response.list[28].weather[0].icon + "@2x.png")
+
+                forecastDate5.html(fiveDays)
+                forecastTemp5.html("Temp: " + response.list[35].main.temp + " °C")
+                forecastHumidity5.html("Humidity: " + response.list[35].main.humidity + " %")
+                forecastPic5.attr ("src", "Assets/" + response.list[35].weather[0].icon + "@2x.png")
+                forecastCards.removeClass("hide")
+            }
+        )
+        
+        var searchTerm = $(this).attr("data-link")
+        console.log(searchTerm)
+        var key = "bda2f2ea374379c994c54cc335a5e52b";
+        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=metric&APPID=" + key;
+    
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+                console.log(response)
+        
+                // This is capturing the Longitude and Latitude of the cities so i can use it for the second Request.
+                userLat = response.coord.lat
+                userLon = response.coord.lon
+    
+                // This code sets all the target cities information in the Big section.
+                currentCityName.html(response.name + " (" + today + ") " + '<img src="Assets/' + response.weather[0].icon + '@2x.png"></img>')
+                currentCityTemp.html("Temperature: " + response.main.temp + " °C")
+                currentCityHumidity.html("Humidity: " + response.main.humidity + " % ")
+                currentCityWind.html("Wind Speed: " + response.wind.speed + " MPH")
+    
+                // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
+                var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
+                var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
+    
+                // This Request is for the UV Index, as it is a seperate API
+                $.ajax({
+                    url: UVqueryURL,
+                    method: "GET"
+                }).then(function(UVresponse) {
+                console.log(UVresponse)
+                currentCityUV.html(UVresponse.value);
+                currentCityUVDiv.removeClass( "hide" );
+    
+                if (UVresponse.value < 3.3) {
+                    currentCityUV.attr("class", "UV-green")
+                    console.log("green")
+                } else if (UVresponse.value > 6.6) {
+                    currentCityUV.attr("class", "UV-red")
+                    console.log("red")
+                } else {
+                    currentCityUV.attr("class", "UV-yellow")
+                    console.log("yellow")
+                }
+                    }
+                )
+            }
+        )
     })
 }
 
@@ -230,47 +400,7 @@ searchBtn.on("click", function(event) {
     storeHistory()
     renderSearches()
     historySearch()
-
-    // pastUserSearch =  $("#searchHistory").find("button")
-    // console.log(pastUserSearch)
-
-    // pastUserSearch.on("click", function() {
-    //     var tester = $(this).attr("data-link")
-    //     console.log(tester)
-    // })
 })
-
-
-
-
-
-
-
-
-
-
-
-// console.log(pastUserSearch)
-
-// historyBtn.on("click", function() {
-//     var tester = $(this).attr("data-link")
-//     console.log(tester)
-// })
-
-//historyBtn.on("click", function() {
-//    alert("hey")
-//    console.log("hey")
-//})
-
-//$("#firstSearch").on("click", function() {
-//    alert("hey")
-//})
-
-// $(".col-11.historyBtn").on("click", function() {
-//     var tester = $(this).attr("data-link")
-//     console.log(tester)
-// })
-
 
 
 
