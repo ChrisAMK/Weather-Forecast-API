@@ -346,7 +346,7 @@ function historySearch() {
     
                 // Code below is a different API request that is executed once the first one returns because i need the Lat and Longitude to go into this request.
                 var UVkey = "bda2f2ea374379c994c54cc335a5e52b";
-                var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
+                var UVqueryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + UVkey + "&lat=" + userLat + "&lon=" + userLon;
     
                 // This Request is for the UV Index, as it is a seperate API
                 $.ajax({
